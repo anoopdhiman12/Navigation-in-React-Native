@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import { 
   EMAIL_CHANGED,
   PASSWORD_CHANGED
@@ -11,9 +12,10 @@ export const emailChanged = (text) => {
     };
   };
 
-  export const passwordChanted =(text) => {
+  export const passwordChanged =(text) => {
     return{
       type: PASSWORD_CHANGED,
       payload: text
     };
   };
+
