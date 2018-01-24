@@ -18,11 +18,22 @@ class LoginForm extends Component {
      this.props.loginUser ({email, password })
     }
 
+    renderButton(){
+      if(this.props.loading){
+        return <Spinner size='large'/>
+      }
+      return (
+        <Button onPress={this.onButtonPress.bind(this)}>
+                        Login
+                    </Button>
+      )
+    }
+
     renderError() {
       if(this.props.error) {
         return (
           <View style={{ backgroundColor: 'white'}}>
-          <Text stle={styles.errorTextStyle}> {this.props.error} </Text>
+          <Text style={styles.errorTextStyle}> {this.props.error} </Text>
           </View>
 
         );
@@ -50,10 +61,8 @@ class LoginForm extends Component {
                     />
                     </CardSection>
                     {this.renderError()}
-                <CardSection>
-                    <Button onPress={this.onButtonPress.bind(this)}>
-                        Login
-                    </Button>
+                <CardSection>                    
+                    {this.renderButton()}
                     </CardSection>
             </Card>   
         )
@@ -61,17 +70,17 @@ class LoginForm extends Component {
 }
 
 const styles = {
-  errorTextStyle:{
+  errorTextStyle: {
     fontSize: 20,
-    alignself: 'center',
+    alignSelf: 'center',
     color: 'red'
   }
 }
 
 const mapStateToProps = ({ auth }) => {
-  const { email, password, error } = auth;
+  const { email, password, error,loading } = auth;
 
-  return { email, password, error };
+  return { email, password, error, loading };
 };
   
   export default connect(mapStateToProps, {
